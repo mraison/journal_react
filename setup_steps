@@ -1,0 +1,6 @@
+## setup steps:
+npm i create-react-app
+npx create-react-app react-api
+cd ./react-api
+npm init
+npm start

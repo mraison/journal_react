@@ -7,7 +7,8 @@ import './App.css';
 //
 // OK i see the issue...I did need to reference the component but I need to be defining a class, not a function...
 import Contacts from './components/contacts';
-
+import RequestGET from './utilities/request_handler';
+import InputField from './components/InputField';
 
 class App extends React.Component {
 
@@ -16,17 +17,20 @@ class App extends React.Component {
   };
 
   componentDidMount = () => {
-        fetch('http://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ contacts: data })
-        })
-        .catch(console.log)
-      };
+    // let res
+    // try {
+    //   res = RequestGET('http://jsonplaceholder.typicode.com/users')
+    // }
+    // catch(e) {
+    //   res = []
+    // }
+    // console.log(res)
+    // this.setState({ contacts: res })
+  }
 
   render = () => {
     return (
-      <Contacts contacts={this.state.contacts}/>
+      <InputField FieldName={'TestName'} FieldValue={'TestValue'}/>
     );
   }
 }

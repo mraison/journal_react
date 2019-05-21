@@ -8,7 +8,7 @@ import './App.css';
 // OK i see the issue...I did need to reference the component but I need to be defining a class, not a function...
 import Contacts from './components/contacts';
 import RequestGET from './utilities/request_handler';
-import InputField from './components/InputField';
+import JournalEntryForm from './components/journal_entry_form';
 
 class App extends React.Component {
 
@@ -30,7 +30,11 @@ class App extends React.Component {
 
   render = () => {
     return (
-      <InputField FieldName={'TestName'} FieldValue={'TestValue'}/>
+      <JournalEntryForm Rows={[
+        {FieldName:'TestName1', FieldValue:'TestValue1'},
+        {FieldName:'TestName2', FieldValue:'TestValue2'},
+        {FieldName:'TestName3', FieldValue:'TestValue3'}
+        ]}/>
     );
   }
 }

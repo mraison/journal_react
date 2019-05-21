@@ -1,0 +1,36 @@
+/*! CSS Used from: https://unpkg.com/envoy.css@1.6.18/css/envoy.css */
+*{
+	box-sizing:border-box;
+}
+.f{
+	font-family:'Cera Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight:400;
+	-webkit-font-smoothing:antialiased;
+}
+.center{
+	text-align:center;
+}
+.mb1{
+	margin-bottom:0.5rem;
+}
+.col-12{
+	width:100%;
+}
+.inputfield{
+	font-family:inherit;
+	font-size:1rem;
+	min-height:2.75em;
+	padding:1px 1rem 0;
+	border:1px solid rgba(40, 44, 54, 0.2);
+	border-radius:4px;
+	box-sizing:border-box;
+	vertical-align:middle;
+}
+.inputfield{
+	transition:all .25s linear;
+}
+.inputfield:focus{
+	outline:none;
+	border:1px solid #EF3934!important;
+	box-shadow:0 0 3px rgba(239, 57, 52, 0.5);
+}

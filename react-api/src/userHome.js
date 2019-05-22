@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 // https://pusher.com/tutorials/consume-restful-api-react
 // I'm using the above guide but noticing a few thing different.
 // firstly we don't need to include Component thus far to get the following to run fine.
@@ -8,14 +6,9 @@ import './App.css';
 // OK i see the issue...I did need to reference the component but I need to be defining a class, not a function...
 // import Contacts from './components/contacts';
 import RequestGET from './utilities/request_handler';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-import userHome from './userHome';
+// import JournalEntryForm from './components/journal_entry_form';
 
-class App extends React.Component {
+class userHome extends React.Component {
 
   state = {
     contacts: []
@@ -35,15 +28,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+      <div>
         <div>
-          <Link to="/users/1/home">user 1</Link>
+          <label> Units:
+              <input className="inputfield" type="text" name="units"/>
+          </label>
         </div>
-
-        <Route path="/users/:userID/home" component={userHome}/>
-      </Router>
+        <div>
+          <label> Value:
+              <input className="inputfield" type="text" name="value"/>
+          </label>
+        </div>
+        <div>
+          <label> Notes:
+              <input className="inputfield" type="text" name="notes"/>
+          </label>
+        </div>
+      </div>
     );
   }
 }
 
-export default App;
+export default userHome;

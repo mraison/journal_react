@@ -7,13 +7,14 @@ import './App.css';
 //
 // OK i see the issue...I did need to reference the component but I need to be defining a class, not a function...
 // import Contacts from './components/contacts';
-import RequestGET from './utilities/request_handler';
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
 import userHome from './userHome';
+import journalEntry from './journalEntry'
+import pointDetails from './pointDetails'
 
 class App extends React.Component {
 
@@ -21,26 +22,15 @@ class App extends React.Component {
     contacts: []
   };
 
-  componentDidMount = () => {
-    // let res
-    // try {
-    //   res = RequestGET('http://jsonplaceholder.typicode.com/users')
-    // }
-    // catch(e) {
-    //   res = []
-    // }
-    // console.log(res)
-    // this.setState({ contacts: res })
+  componentDidMount() {
   }
 
   render() {
     return (
       <Router>
-        <div>
-          <Link to="/users/1/home">user 1</Link>
-        </div>
-
         <Route path="/users/:userID/home" component={userHome}/>
+        <Route path="/users/:userID/entry" component={journalEntry}/>
+        <Route path="/users/:userID/points/:pointID" component={pointDetails}/>
       </Router>
     );
   }

@@ -1,29 +1,16 @@
 import React from 'react';
-// https://pusher.com/tutorials/consume-restful-api-react
-// I'm using the above guide but noticing a few thing different.
-// firstly we don't need to include Component thus far to get the following to run fine.
-//
-// OK i see the issue...I did need to reference the component but I need to be defining a class, not a function...
-// import Contacts from './components/contacts';
-import RequestGET from './utilities/request_handler';
-// import JournalEntryForm from './components/journal_entry_form';
+// This isn't actually the right form. the home page should be a menu to navigate over some user options.
 
 class userHome extends React.Component {
 
   state = {
-    contacts: []
+    data: {units: 'ft', value: 5, notes: 'test dummy data', time: 123456789}
   };
 
   componentDidMount = () => {
-    // let res
-    // try {
-    //   res = RequestGET('http://jsonplaceholder.typicode.com/users')
-    // }
-    // catch(e) {
-    //   res = []
-    // }
-    // console.log(res)
-    // this.setState({ contacts: res })
+    this.setState({
+      userID: this.props.match.params.userID
+    })
   }
 
   render() {
@@ -31,17 +18,22 @@ class userHome extends React.Component {
       <div>
         <div>
           <label> Units:
-              <input className="inputfield" type="text" name="units"/>
+              <p>{this.state.data.units}</p>
           </label>
         </div>
         <div>
           <label> Value:
-              <input className="inputfield" type="text" name="value"/>
+              <p>{this.state.data.value}</p>
           </label>
         </div>
         <div>
           <label> Notes:
-              <input className="inputfield" type="text" name="notes"/>
+              <p>{this.state.data.notes}</p>
+          </label>
+        </div>
+        <div>
+          <label> Time:
+              <p>{this.state.data.time}</p>
           </label>
         </div>
       </div>

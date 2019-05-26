@@ -18,21 +18,24 @@ class pointDetails extends React.Component {
   render() {
     return (
       <div>
-      <h3>User ID: {this.state.userID}</h3>
-      <h3>Point ID: {this.state.pointID}</h3>
         <div>
           <label> Units:
-              <input className="inputfield" type="text" name="units"/>
+              <p>{this.state.data.units}</p>
           </label>
         </div>
         <div>
           <label> Value:
-              <input className="inputfield" type="text" name="value"/>
+              <p>{this.state.data.value}</p>
           </label>
         </div>
         <div>
           <label> Notes:
-              <input className="inputfield" type="text" name="notes"/>
+              <p>{this.state.data.notes}</p>
+          </label>
+        </div>
+        <div>
+          <label> Time:
+              <p>{this.state.data.time}</p>
           </label>
         </div>
       </div>

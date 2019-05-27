@@ -15,7 +15,12 @@ class pointDetails extends React.Component {
     componentDidMount() {
       let j = {data: []}
       const url = `http://localhost:8080/users/${this.props.match.params.userID}/points/${this.props.match.params.pointID}`
-      fetch(url, {method:'GET'})
+      fetch(url, {
+          method:'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+        })
         .then(response => response.json()) // convert reponse to json
         .then(data => {
           // So my main data processing will need to go in here. same for the other modules.

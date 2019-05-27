@@ -8,14 +8,20 @@ class userHome extends React.Component {
     }
 
     componentDidMount() {
+      console.log('here here')
       // this.state = {}
       let j = {data: []}
       const url = `http://localhost:8080/users/${this.props.match.params.userID}/points`
-      fetch(url, {method:'GET'})
+      fetch(url, {
+          method:'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+        })
         .then(response => response.json()) // convert reponse to json
         .then(data => {
           console.log(data)
-          const d = data.map(j => j.valueReal)
+          const d = data.map(j => j.value)
           // So my main data processing will need to go in here. same for the other modules.
           ReactDOM.render(
             <div>

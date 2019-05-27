@@ -14,6 +14,7 @@ class userHome extends React.Component {
       fetch(url, {method:'GET'})
         .then(response => response.json()) // convert reponse to json
         .then(data => {
+          console.log(data)
           const d = data.map(j => j.valueReal)
           // So my main data processing will need to go in here. same for the other modules.
           ReactDOM.render(

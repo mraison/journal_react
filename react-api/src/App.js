@@ -30,7 +30,7 @@ class App extends React.Component {
     return (
       <Router>
         <Route path="/users/:userID/home" component={userHome}/>
-        <Route path="/users/:userID/recordSearch" component={recordSearch}/>
+        <Route path="/users/:userID/points" component={recordSearch}/>
         <Route path="/users/:userID/entry" component={journalEntry}/>
         <Route path="/users/:userID/points/:pointID" component={pointDetails}/>
       </Router>

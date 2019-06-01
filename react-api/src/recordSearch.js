@@ -15,7 +15,8 @@ class userHome extends React.Component {
       fetch(url, {
           method:'GET',
           headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer eyJhbGciOiAiSFMyNTYifQ==.eyJJRCI6IDMsICJyb2xlIjogInVzZXIifQ==.VDZg7fpSazqx6fNMrmLcJr3pddLmk+WaIJrT7a495kI='
           },
         })
         .then(response => response.json()) // convert reponse to json
@@ -26,8 +27,9 @@ class userHome extends React.Component {
           ReactDOM.render(
             <div>
               <BarChart chartData={d} chartID={this.props.match.params.userID}/>
-            </div>, document.getElementById('searchResults')
-            )
+            </div>,
+            document.getElementById('searchResults')
+          )
         }); // set in state
     }
 

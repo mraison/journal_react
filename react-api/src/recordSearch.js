@@ -14,7 +14,7 @@ class userHome extends React.Component {
       const url = `http://localhost:8080/users/${this.props.match.params.userID}/points`
       fetch(url, {
           method:'GET',
-          headers: {
+          headers: { // Right now this issues a hard fail if the request is not authorized.
               'Content-Type': 'application/json',
               'Authorization': 'Bearer eyJhbGciOiAiSFMyNTYifQ==.eyJJRCI6IDMsICJyb2xlIjogInVzZXIifQ==.VDZg7fpSazqx6fNMrmLcJr3pddLmk+WaIJrT7a495kI='
           },

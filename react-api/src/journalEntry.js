@@ -1,5 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
+import cookie from 'react-cookies'
+import Navigation from './components/navigation'
 
 class journalEntry extends React.Component {
   constructor(props) {
@@ -19,29 +21,30 @@ class journalEntry extends React.Component {
     this.updatePointNotes = this.updatePointNotes.bind(this);
   }
 
-  componentDidMount = () => {
-    this.setState({
-      userID: this.props.match.params.userID
-    })
-  }
+  // componentDidMount = () => {
+  //   this.setState({
+  //     userID: this.props.match.params.userID
+  //   })
+  // }
 
   handleSubmitAndRedirect(event) {
     event.preventDefault();
     const tmpState = this.state;
     const url = `http://localhost:8080/users/${this.props.match.params.userID}/points`;
+    const bearer_token = cookie.load('bearer_token')
     //prepare data a little more here....
 
     // Get unix timestamp.
     const time = new Date().getTime()
     tmpState['time'] = time
     const jsonPostData = JSON.stringify(tmpState)
-    console.log(jsonPostData)
 
     fetch(url, {
         method: 'POST',
         body: jsonPostData,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${bearer_token}`
         },
       }).then(response => response.json()) // convert reponse to json
         .then(data => {
@@ -100,57 +103,62 @@ class journalEntry extends React.Component {
     return (
       <div>
         {this.renderRedirect()}
-        <form>
-          <div>
-            <label> Units:
-                <input
-                  className="inputfield"
-                  type="text"
-                  name="units"
-                  onChange={this.updatePointUnits}
-                />
-            </label>
-          </div>
-          <div>
-            <label> Value:
-                <input
-                  className="inputfield" 
-                  type="text" 
-                  name="value"
-                  onChange={this.updatePointValue}
-                />
-            </label>
-          </div>
-          <div>
-            <label> Notes:
-                <input
-                  className="inputfield"
-                  type="text"
-                  name="notes"
-                  onChange={this.updatePointNotes}
-                />
-            </label>
-          </div>
-          <div>
-            <label> Tags:
-                <input 
-                  className="inputfield" 
-                  type="text" 
-                  name="tags"
-                  onChange={this.updatePointTags}
-                />
-            </label>
-          </div>
-          <div>
-            <label>
-              <button
-                onClick={this.handleSubmitAndRedirect}
-              >
-                Submit
-              </button>
-            </label>
-          </div>
-        </form>
+        <div className="head-nav">
+          <Navigation userID={this.props.match.params.userID}/>
+        </div>
+        <div className="main-page">
+          <form>
+            <div>
+              <label> Units:
+                  <input
+                    className="inputfield"
+                    type="text"
+                    name="units"
+                    onChange={this.updatePointUnits}
+                  />
+              </label>
+            </div>
+            <div>
+              <label> Value:
+                  <input
+                    className="inputfield" 
+                    type="text" 
+                    name="value"
+                    onChange={this.updatePointValue}
+                  />
+              </label>
+            </div>
+            <div>
+              <label> Notes:
+                  <input
+                    className="inputfield"
+                    type="text"
+                    name="notes"
+                    onChange={this.updatePointNotes}
+                  />
+              </label>
+            </div>
+            <div>
+              <label> Tags:
+                  <input 
+                    className="inputfield" 
+                    type="text" 
+                    name="tags"
+                    onChange={this.updatePointTags}
+                  />
+              </label>
+            </div>
+            <div>
+              <label>
+                <button
+                  onClick={this.handleSubmitAndRedirect}
+                >
+                  Submit
+                </button>
+              </label>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

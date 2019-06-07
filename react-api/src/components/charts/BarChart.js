@@ -23,6 +23,7 @@ class BarChart extends Component {
 	}
 
 	drawChart() {
+		console.log(this.props.chartData)
 		d3.select("svg").remove()
 
 		const data = this.props.chartData;
@@ -35,25 +36,28 @@ class BarChart extends Component {
 		    .attr("height", h)
 		    .style("margin-left", 100);
 	      
-	      // place data    
+	      // place data
+	    // svg.append("a").attr("xlink:href", (d, i) => d.ID)
 	    svg.selectAll("rect")
 	      .data(data)
 	      .enter()
+	      .append("a").attr("xlink:href", (d, i) => `points/${d.ID}`)
 	      .append("rect")
 	      .attr("x", (d, i) => i * 70)
-	      .attr("y", (d, i) => h - 10 * d)
+	      .attr("y", (d, i) => h - 10 * d.value)
 	      .attr("width", 65)
-	      .attr("height", (d, i) => d * 10)
+	      .attr("height", (d, i) => d.value * 10)
 	      .attr("fill", "green")
 
 	      // label
 	    svg.selectAll("text")
 		  .data(data)
 		  .enter()
+		  .append("a").attr("xlink:href", (d, i) => `points/${d.ID}`)
 		  .append("text")
-		  .text((d) => d)
+		  .text((d) => d.value)
 		  .attr("x", (d, i) => i * 70)
-		  .attr("y", (d, i) => h - (10 * d) - 3)
+		  .attr("y", (d, i) => h - (10 * d.value) - 3)
 
 	}
 

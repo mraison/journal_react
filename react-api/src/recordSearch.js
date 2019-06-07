@@ -21,11 +21,12 @@ class userHome extends React.Component {
         })
         .then(response => {console.log(response); return response.json()}) // convert reponse to json
         .then(data => {
-          const d = data.map(j => j.value)
+          // const d = data.map(j => )
+          console.log(data)
           // So my main data processing will need to go in here. same for the other modules.
           ReactDOM.render(
             <div>
-              <BarChart chartData={d} chartID={this.props.match.params.userID}/>
+              <BarChart chartData={data} chartID={this.props.match.params.userID}/>
             </div>,
             document.getElementById('searchResults')
           )

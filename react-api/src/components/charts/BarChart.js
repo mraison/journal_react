@@ -23,11 +23,13 @@ class BarChart extends Component {
 	}
 
 	drawChart() {
+		d3.select("svg").remove()
+
 		const data = this.props.chartData;
 		const w = this.state.chartWidth
 		const h = this.state.chartHeight
 		// create frame (I thiiiiiiiink...)
-		const svg = d3.select("body")
+		const svg = d3.select("#chart")
 		    .append("svg")
 		    .attr("width", w)
 		    .attr("height", h)
@@ -56,7 +58,9 @@ class BarChart extends Component {
 	}
 
 	render() {
-		return (<div id={"#" + this.props.chartID}></div>)
+		return (
+			<div id="chart"></div>
+		)
 	}
 
 }

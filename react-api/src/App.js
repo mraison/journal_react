@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Redirect } from 'react-router-dom'
 import cookie from 'react-cookies'
+import history from './history';
 // https://pusher.com/tutorials/consume-restful-api-react
 // I'm using the above guide but noticing a few thing different.
 // firstly we don't need to include Component thus far to get the following to run fine.

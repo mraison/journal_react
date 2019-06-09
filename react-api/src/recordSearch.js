@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import BarChart from './components/charts/BarChart'
 import cookie from 'react-cookies'
 import Navigation from './components/navigation'
+import SearchBar from './components/searchBar'
 
 class userHome extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class userHome extends React.Component {
     }
 
     componentDidMount() {
-      const url = `http://localhost:8080/users/${this.props.match.params.userID}/points`
+      const queryParams = typeof this.props.location.search === 'undefined' ? '' : this.props.location.search
+      const url = `http://localhost:8080/users/${this.props.match.params.userID}/points${queryParams}`
       const bearer_token = cookie.load('bearer_token')
       fetch(url, {
           method:'GET',
@@ -40,6 +42,9 @@ class userHome extends React.Component {
       <div>
         <div className="head-nav">
           <Navigation userID={this.props.match.params.userID}/>
+        </div>
+        <div>
+          <SearchBar/>
         </div>
         <div className="main-page">
           <div id="searchResults"/>

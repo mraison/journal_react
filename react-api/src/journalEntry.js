@@ -10,7 +10,7 @@ class journalEntry extends React.Component {
       units: undefined,
       value: undefined,
       notes: '',
-      tags: []
+      tags: null
       // requiredFields: ['units', 'values', 'notes']
     };
 
@@ -69,7 +69,7 @@ class journalEntry extends React.Component {
 
   updatePointTags(event) {
     //@TODO add support for multi-entry / multi-select. First pass in comments below.
-    this.setState({tags: [event.target.value]})
+    this.setState({tags: event.target.value})
     // const tmpTagsState = this.state.tags
 
     // const targetVal = event.target.value

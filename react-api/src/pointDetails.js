@@ -20,6 +20,7 @@ class pointDetails extends React.Component {
       })
       .then(response => response.json()) // convert reponse to json
       .then(data => {
+        console.log(data)
         // So my main data processing will need to go in here. same for the other modules.
         ReactDOM.render(
           <div>
@@ -41,6 +42,11 @@ class pointDetails extends React.Component {
             <div>
               <label> Time:
                   <p>{data.time}</p>
+              </label>
+            </div>
+            <div>
+              <label> Tags:
+                  <p>{data.tags}</p>
               </label>
             </div>
           </div>,

@@ -18,7 +18,7 @@ import {
 import recordSearch from './recordSearch'
 import journalEntry from './journalEntry'
 import pointDetails from './pointDetails'
-import login from './login'
+import LoginSignUpPage from './loginSignUpPage'
 import logout from './logout'
 import GroupManagement from './groupManagement'
 
@@ -58,7 +58,7 @@ class App extends React.Component {
     return (
       <div>
         <Router>
-          <Route path="/users/login" component={login}/>
+          <Route path="/users/login" component={LoginSignUpPage}/>
           
           <Route render={({history}) => (
             this.renderRedirect(history)
@@ -67,7 +67,7 @@ class App extends React.Component {
           <Route exact path="/users/:userID/points" component={recordSearch}/>
           <Route path="/users/:userID/entry" component={journalEntry}/>
           <Route path="/users/logout" component={logout}/>
-          
+
           <Route path="/users/:userID/groups" component={GroupManagement}/>
         </Router>
       </div>

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import cookie from 'react-cookies'
 import LoginSignUp from './components/loginLogout/loginSignUp'
 
-class Login extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ class Login extends React.Component {
   handleSubmitAndRedirect(event, username, password) {
     event.preventDefault();
     const data = {username: username, password: password};
-    const url = `http://localhost:8081/request_jwt`;
+    const url = `http://localhost:8081/user`;
     //prepare data a little more here....
 
     const jsonPostData = JSON.stringify(data)
@@ -39,7 +39,6 @@ class Login extends React.Component {
           cookie.save('bearer_token', data['bearer_token'], {'path': '/'})
           cookie.save('userID', data['ID'], {'path': '/'})
           const userID = data['ID']
-          console.log(data)
           this.setState({
             redirectURL: `/users/${userID}/points`
           })
@@ -68,4 +67,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default SignUp;

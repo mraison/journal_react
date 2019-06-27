@@ -11,7 +11,6 @@ class journalEntry extends React.Component {
       value: undefined,
       notes: '',
       tags: null
-      // requiredFields: ['units', 'values', 'notes']
     };
 
     this.handleSubmitAndRedirect = this.handleSubmitAndRedirect.bind(this);
@@ -20,12 +19,6 @@ class journalEntry extends React.Component {
     this.updatePointTags = this.updatePointTags.bind(this);
     this.updatePointNotes = this.updatePointNotes.bind(this);
   }
-
-  // componentDidMount = () => {
-  //   this.setState({
-  //     userID: this.props.match.params.userID
-  //   })
-  // }
 
   handleSubmitAndRedirect(event) {
     event.preventDefault();

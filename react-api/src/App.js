@@ -21,6 +21,7 @@ import pointDetails from './pointDetails'
 import LoginSignUpPage from './loginSignUpPage'
 import logout from './logout'
 import GroupManagement from './groupManagement'
+import recordSets from './recordSets'
 
 class App extends React.Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class App extends React.Component {
           )} />
           <Route exact path="/users/:userID/points/:pointID" component={pointDetails}/>
           <Route exact path="/users/:userID/points" component={recordSearch}/>
+          <Route exact path="/users/:userID/recordSets" component={recordSets}/>
           <Route path="/users/:userID/entry" component={journalEntry}/>
           <Route path="/users/logout" component={logout}/>
 

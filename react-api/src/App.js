@@ -22,6 +22,7 @@ import LoginSignUpPage from './loginSignUpPage'
 import logout from './logout'
 import GroupManagement from './groupManagement'
 import recordSets from './recordSets'
+import recordSetPage from './components/recordSets/recordSet/recordSetPage'
 
 class App extends React.Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class App extends React.Component {
             this.renderRedirect(history)
           )} />
           <Route exact path="/users/:userID/points/:pointID" component={pointDetails}/>
-          <Route exact path="/users/:userID/points" component={recordSearch}/>
+          <Route exact path="/users/:userID/recordSets/:recordSetID/measurements" component={recordSetPage}/>
           <Route exact path="/users/:userID/recordSets" component={recordSets}/>
           <Route path="/users/:userID/entry" component={journalEntry}/>
           <Route path="/users/logout" component={logout}/>

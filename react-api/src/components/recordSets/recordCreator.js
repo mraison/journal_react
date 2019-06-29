@@ -8,6 +8,21 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 
+const readWriteActionOptions = [
+  {
+    label:'read',
+    value:'r'
+  },
+  {
+    label:'write',
+    value:'w'
+  },
+  {
+    label:'read/write',
+    value:'rw'
+  },
+]
+
 class RecordCreator extends React.Component {
     constructor() {
         super();
@@ -17,7 +32,7 @@ class RecordCreator extends React.Component {
 
             selectedName: null,
             selectedPermissionGroupName: null,
-            selectedGroupActions: '',
+            selectedGroupActions: null,
             selectedGlobalAccessibleAction: ''
         };
 
@@ -59,8 +74,8 @@ class RecordCreator extends React.Component {
       const tmpState = {
         name: this.state.selectedName,
         permissionGroupName: this.state.selectedPermissionGroupName,
-        groupPermissionsActions: this.state.selectedGroupActions,
-        globalPermissionsActions: this.state.selectedGlobalAccessibleAction
+        groupPermissionsActions: !!this.state.selectedGroupActions ? this.state.selectedGroupActions : '',
+        globalPermissionsActions: !!this.state.selectedGlobalAccessibleAction ? this.state.selectedGlobalAccessibleAction : ''
       }
 
       const url = `http://localhost:8080/users/${this.props.userID}/recordSets`;
@@ -114,30 +129,22 @@ class RecordCreator extends React.Component {
                 </div>
                 <div>
                   <label>Permission Group Name:</label>
-                    <div id='groupsDropdown'>
-                        <Dropdown value={this.state.selectedPermissionGroupName} options={this.state.permissionGroupOptions} onChange={(e) => {this.setState({selectedPermissionGroupName: e.target.value})}} itemTemplate={this.groupDropdownTemplate}
-                                  filter={true} filterPlaceholder="Select Group" filterBy="label,value" showClear={true}/>
-                    </div>
+                  <div id='groupsDropdown'>
+                      <Dropdown value={this.state.selectedPermissionGroupName} options={this.state.permissionGroupOptions} onChange={this.updateSelectedPermissionGroupName} itemTemplate={this.groupDropdownTemplate}
+                                filter={true} filterPlaceholder="Select Group" filterBy="label,value" showClear={true}/>
+                  </div>
                 </div>
                 <div>
-                  <label> Group Actions:
-                      <input
-                        className="selectedGroupActions"
-                        type="text"
-                        name="selectedGroupActions"
-                        onChange={this.updateSelectedGroupActions}
-                      />
-                  </label>
+                  <label> Group Actions:</label>
+                  <div id='readWriteActionDropdown'>
+                        <Dropdown value={this.state.selectedGroupActions} options={readWriteActionOptions} onChange={this.updateSelectedGroupActions} itemTemplate={this.groupDropdownTemplate}/>
+                  </div>
                 </div>
                 <div>
-                  <label> Global Accessible Action:
-                      <input 
-                        className="selectedGlobalAccessibleAction" 
-                        type="text" 
-                        name="selectedGlobalAccessibleAction"
-                        onChange={this.updateSelectedGlobalAccessibleAction}
-                      />
-                  </label>
+                  <label> Global Accessible Action:</label>
+                  <div id='readWriteActionDropdown'>
+                        <Dropdown value={this.state.selectedGlobalAccessibleAction} options={readWriteActionOptions} onChange={this.updateSelectedGlobalAccessibleAction} itemTemplate={this.groupDropdownTemplate}/>
+                  </div>
                 </div>
                 <div>
                   <label>

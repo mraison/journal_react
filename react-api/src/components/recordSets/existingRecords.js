@@ -11,7 +11,7 @@ class ExistingRecords extends React.Component {
     let links = []
     if (typeof userRecordSets !== 'undefined') {
       userRecordSets.map( (recordSet) =>
-        links.push(<div><Link to={`/users/${userID}/recordSets/${recordSet['ID']}`}>{recordSet['name']}</Link>{' '}</div>)
+        links.push(<div key={`set-${recordSet['ID']}`}><Link to={`/users/${userID}/recordSets/${recordSet['ID']}/measurements`}>{recordSet['name']}</Link>{' '}</div>)
       )
     }
     return links

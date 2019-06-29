@@ -29,6 +29,7 @@ class BarChart extends Component {
 		const data = this.props.chartData;
 		const w = this.state.chartWidth
 		const h = this.state.chartHeight
+
 		// create frame (I thiiiiiiiink...)
 		const svg = d3.select("#chart")
 		    .append("svg")

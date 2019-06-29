@@ -8,9 +8,10 @@ class Navigation extends React.Component {
   }
 
   render() {
+    // <Link to={`/users/${this.props.userID}/points`}>Points Page</Link>{' '} remove this for now...
     return (
       <div>
-        <Link to={`/users/${this.props.userID}/points`}>Points Page</Link>{' '}
+        <Link to={`/users/${this.props.userID}/recordSets`}>Record Sets</Link>{' '}
         <Link to={`/users/${this.props.userID}/entry`}>Journal Entry </Link>{' '}
         <Link to="/users/logout">Logout</Link>{' '}
         <Link to={`/users/${this.props.userID}/groups`}>Manage Permission Groups</Link>{' '}

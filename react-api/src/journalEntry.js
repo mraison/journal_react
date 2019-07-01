@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom'
 import cookie from 'react-cookies'
 import Navigation from './components/navigation'
+import {Dropdown} from 'primereact/dropdown'
 
 class journalEntry extends React.Component {
   constructor(props) {
@@ -10,26 +11,49 @@ class journalEntry extends React.Component {
       units: undefined,
       value: undefined,
       notes: '',
-      tags: null
+      recordSetID: undefined,
+      users_record_sets: []
     };
 
     this.handleSubmitAndRedirect = this.handleSubmitAndRedirect.bind(this);
     this.updatePointUnits = this.updatePointUnits.bind(this);
     this.updatePointValue = this.updatePointValue.bind(this);
-    this.updatePointTags = this.updatePointTags.bind(this);
+    this.updatePointRecordSetID = this.updatePointRecordSetID.bind(this);
     this.updatePointNotes = this.updatePointNotes.bind(this);
   }
 
+  componentDidMount() {
+      const url = `http://localhost:8080/users/${this.props.match.params.userID}/recordSets`
+      const bearer_token = cookie.load('bearer_token')
+      fetch(url, {
+          method:'GET',
+          headers: { // Right now this issues a hard fail if the request is not authorized.
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${bearer_token}`
+          },
+        })
+        .then(response => response.json()) // convert reponse to json
+        .then(data => {
+          console.log(data)
+          this.setState({
+            users_record_sets: data.map(d => ({label: d['name'], value: d['ID']}))
+          })
+        });
+    }
+
   handleSubmitAndRedirect(event) {
     event.preventDefault();
-    const tmpState = this.state;
-    const url = `http://localhost:8080/users/${this.props.match.params.userID}/points`;
+    const tmpState = {
+      time: new Date().getTime(),
+      units: this.state.units,
+      value: this.state.value,
+      notes: this.state.notes,
+      recordSetID: this.state.recordSetID
+    };
+    const url = `http://localhost:8080/users/${this.props.match.params.userID}/recordSets/${this.state.recordSetID}/measurements`;
     const bearer_token = cookie.load('bearer_token')
     //prepare data a little more here....
 
-    // Get unix timestamp.
-    const time = new Date().getTime()
-    tmpState['time'] = time
     const jsonPostData = JSON.stringify(tmpState)
 
     fetch(url, {
@@ -44,7 +68,7 @@ class journalEntry extends React.Component {
           console.log(data)
           const pointID = data['ID']
           this.setState({
-            redirectURL: `/users/${this.props.match.params.userID}/points/${pointID}`
+            redirectURL: `/users/${this.props.match.params.userID}/recordSets/${this.state.recordSetID}/measurements/${pointID}`
           })
         });
 
@@ -60,31 +84,24 @@ class journalEntry extends React.Component {
     this.setState({notes: event.target.value})
   }
 
-  updatePointTags(event) {
+  updatePointRecordSetID(event) {
     //@TODO add support for multi-entry / multi-select. First pass in comments below.
-    this.setState({tags: event.target.value})
-    // const tmpTagsState = this.state.tags
+    this.setState({recordSetID: event.target.value})
 
-    // const targetVal = event.target.value
-    // const targetValIndex = tmpTagsState.indexOf(targetVal)
-    // if (targetValIndex === -1) {
-    //   // element not found so add it.
-    //   this._addPointTags(targetVal)
-    // } else {
-    //   // element found so we'll need to remove it.
-    //   this._removePointTags(targetValIndex, tmpTagsState)
-    // }
   }
 
-  // _addPointTags(targetVal) {
-  //   this.setState(
-  //     prevState => ({tags: [...prevState.tags, targetVal]})
-  //   )
-  // }
-
-  // _removePointTags(targetValIndex, currentTags) {
-  //   this.setState({tags: currentTags.splice(targetValIndex, 1)})
-  // }
+  dropdownTemplate(option) {
+        if(!option.value) {
+            return option.label;
+        }
+        else {
+            return (
+                <div className="p-clearfix">
+                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                </div>
+            );
+        }
+    }
 
   renderRedirect() {
     if (this.state.redirectURL) {
@@ -132,14 +149,11 @@ class journalEntry extends React.Component {
               </label>
             </div>
             <div>
-              <label> Tags:
-                  <input 
-                    className="inputfield" 
-                    type="text" 
-                    name="tags"
-                    onChange={this.updatePointTags}
-                  />
-              </label>
+              <label> Record Set:</label>
+              <div className="content-section implementation">
+                  <Dropdown value={this.state.recordSetID} options={this.state.users_record_sets} onChange={this.updatePointRecordSetID} itemTemplate={this.dropdownTemplate}
+                            filter={true} filterPlaceholder="Select Record Set" filterBy="label,value" showClear={true}/>
+              </div>
             </div>
             <div>
               <label>

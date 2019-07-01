@@ -65,10 +65,10 @@ class App extends React.Component {
           <Route render={({history}) => (
             this.renderRedirect(history)
           )} />
-          <Route exact path="/users/:userID/points/:pointID" component={pointDetails}/>
+          <Route exact path="/users/:userID/recordSets/:recordSetID/measurements/:measurementID" component={pointDetails}/>
           <Route exact path="/users/:userID/recordSets/:recordSetID/measurements" component={recordSetPage}/>
           <Route exact path="/users/:userID/recordSets" component={recordSets}/>
-          <Route path="/users/:userID/entry" component={journalEntry}/>
+          <Route path="/users/:userID/newMeasurement" component={journalEntry}/>
           <Route path="/users/logout" component={logout}/>
 
           <Route path="/users/:userID/groups" component={GroupManagement}/>

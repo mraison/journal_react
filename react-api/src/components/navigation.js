@@ -12,9 +12,9 @@ class Navigation extends React.Component {
     return (
       <div>
         <Link to={`/users/${this.props.userID}/recordSets`}>Record Sets</Link>{' '}
-        <Link to={`/users/${this.props.userID}/entry`}>Journal Entry </Link>{' '}
-        <Link to="/users/logout">Logout</Link>{' '}
+        <Link to={`/users/${this.props.userID}/newMeasurement`}>Journal Entry </Link>{' '}
         <Link to={`/users/${this.props.userID}/groups`}>Manage Permission Groups</Link>{' '}
+        <Link to="/users/logout">Logout</Link>{' '}
       </div>
     );
   }

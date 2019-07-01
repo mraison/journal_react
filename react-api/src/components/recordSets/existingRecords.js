@@ -9,8 +9,8 @@ class ExistingRecords extends React.Component {
 
   generateRecordSetLinks(userRecordSets, userID) {
     let links = []
-    if (typeof userRecordSets !== 'undefined') {
-      userRecordSets.map( (recordSet) =>
+    if (Array.isArray(userRecordSets)) {
+      userRecordSets.map((recordSet) =>
         links.push(<div key={`set-${recordSet['ID']}`}><Link to={`/users/${userID}/recordSets/${recordSet['ID']}/measurements`}>{recordSet['name']}</Link>{' '}</div>)
       )
     }

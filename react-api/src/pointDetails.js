@@ -9,7 +9,7 @@ class pointDetails extends React.Component {
 
   componentDidMount() {
     let j = {data: []}
-    const url = `http://localhost:8080/users/${this.props.match.params.userID}/points/${this.props.match.params.pointID}`
+    const url = `http://localhost:8080/users/${this.props.match.params.userID}/recordSets/${this.props.match.params.recordSetID}/measurements/${this.props.match.params.measurementID}`
     const bearer_token = cookie.load('bearer_token')
     fetch(url, {
         method:'GET',
@@ -41,12 +41,7 @@ class pointDetails extends React.Component {
             </div>
             <div>
               <label> Time:
-                  <p>{data.time}</p>
-              </label>
-            </div>
-            <div>
-              <label> Tags:
-                  <p>{data.tags}</p>
+                  <p>{data.unixTime}</p>
               </label>
             </div>
           </div>,

@@ -41,7 +41,7 @@ class Login extends React.Component {
           const userID = data['ID']
           console.log(data)
           this.setState({
-            redirectURL: `/users/${userID}/points`
+            redirectURL: `/users/${userID}/recordSets`
           })
         })
         .catch(e => this.setState({error: true}));
@@ -57,7 +57,7 @@ class Login extends React.Component {
             redirectURL={this.state.redirectURL}
           />
         </div>
-        { this.state.error ?
+        {this.state.error ?
           <div>
             <span>An error occured</span>
           </div>

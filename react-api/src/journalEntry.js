@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import cookie from 'react-cookies'
 import Navigation from './components/navigation'
 import {Dropdown} from 'primereact/dropdown'
+import {Growl} from 'primereact/growl';
 
 class journalEntry extends React.Component {
   constructor(props) {
@@ -35,6 +36,14 @@ class journalEntry extends React.Component {
         .then(response => response.json()) // convert reponse to json
         .then(data => {
           console.log(data)
+
+          if (data.length === 0) {
+            // this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+            const summary = <span><i className="pi" /> <strong>No Record Sets</strong></span>;
+            const detail = <span width="250px">Please define a record set before attempting to record measurements.</span>;
+            this.growl.show({severity: 'error', summary: summary, detail: detail, sticky: true})
+          }
+
           this.setState({
             users_record_sets: data.map(d => ({label: d['name'], value: d['ID']}))
           })
@@ -113,8 +122,9 @@ class journalEntry extends React.Component {
     return (
       <div>
         {this.renderRedirect()}
+        <Growl ref={(el) => this.growl = el} />
         <div className="head-nav">
-          <Navigation userID={this.props.match.params.userID}/>
+          <Navigation userID={cookie.load('userID')}/>
         </div>
         <div className="main-page">
           <form>

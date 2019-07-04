@@ -53,7 +53,7 @@ class recordSetPage extends React.Component {
     return (
       <div>
         <div className="head-nav">
-          <Navigation userID={this.props.match.params.userID}/>
+          <Navigation userID={cookie.load('userID')}/>
         </div>
         <div id="permissionDetails"/>
         <div className="main-page">

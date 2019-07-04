@@ -41,7 +41,7 @@ class App extends React.Component {
       if (typeof bearer_token !== 'undefined') {
         // if bearer token is set we don't need to do anything so allow forwarding to the relavent react component.
         const userID = cookie.load('userID')
-        return <Redirect to={`/users/${userID}/points`}/>
+        return <Redirect to={`/users/${userID}/recordSets`}/>
       }
 
       return
